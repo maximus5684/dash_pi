@@ -28,6 +28,6 @@ License
 See the LICENSE file for various licenses for code from the following projects which
 were re-used in whole or part for this project:
 
-BluePlayer [https://github.com/Douglas6/blueplayer] - Bluetooth A2DP and AVRCP Functions
-POTSBLIZ [https://github.com/long-exposure/potsbliz-src] - Bluetooth HFP Functions
-PyOBEX [https://bitbucket.org/dboddie/pyobex] - Bluetooth PBAP Functions
+* BluePlayer [https://github.com/Douglas6/blueplayer] - Bluetooth A2DP and AVRCP Functions
+* POTSBLIZ [https://github.com/long-exposure/potsbliz-src] - Bluetooth HFP Functions
+* PyOBEX [https://bitbucket.org/dboddie/pyobex] - Bluetooth PBAP Functions
