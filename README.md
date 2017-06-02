@@ -6,8 +6,19 @@ A full vehicle dashboard application framework for the Raspberry Pi.
 Requirements
 ------------
 
-* Raspberry Pi 3
-* HifiBerry DAC+ RCA
+# Hardware #
+
+* [https://www.amazon.com/Raspberry-Model-A1-2GHz-64-bit-quad-core/dp/B01CD5VC92/] (Raspberry Pi 3) ($35)
+* [https://www.amazon.com/HiFiBerry-DACPLUS-RCA-DAC-RCA-version/dp/B0147RA2PY/] (HifiBerry DAC+ RCA) ($35)
+* [https://www.amazon.com/Sandisk-Ultra-Memory-MicroSDHC-SDSQUNC-032G-AN6IA/dp/B011Z77M0C/] (MicroSD Card - Class 10) At least 32GB recommended ($15)
+* [http://www.mini-box.com/DCDC-USB] (Mini-Box DCDC-USB Power Supply) ($55)
+* [http://www.mini-box.com/DCDC-USB-ENCLOSURE] (Mini-Box DCDC-USB Enclosure) (optional - $4)
+* Audio Amplifier with RCA Input ($50 - $200)
+* Amplifier cable kit - recommend [https://www.amazon.com/Audio-Amplifier-Installation-Performance-Interconnect/dp/B0002VM8RU/] (BOSS Audio KIT10) ($18)
+* [https://www.amazon.com/BOSS-Audio-B25N-Ground-Isolator/dp/B000LP4RMG/] (RCA Ground-loop Isolator) ($5 - $7)
+
+# Software #
+
 * Raspbian Jessie with PIXEL Desktop
 * BlueZ 5
 * PulseAduio 5
@@ -15,7 +26,34 @@ Requirements
 Installation
 ------------
 
-TODO
+# Power Supply Configuration #
+
+To configure the DCDC-USB power supply for automotive PC applications you will
+need to set the following jumpers:
+
+* CONFIG jumpers
+  * 0 OFF
+  * 1 OFF
+  * 2 ON
+  * 3 OFF
+  * 4 OFF
+  * 5 ON
+  * 6 OFF
+  * 7 ON
+
+This will configure the power supply for Automotive mode, 5V output, and a 5 second
+shutdown signal delay with a 60 second shutdown wait time. For more information on
+jumper configuration, see the manual here:
+
+http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf
+
+# Basic Steps #
+
+* Remove factory stereo head unit
+* Install amplifier within cable-reach of Raspberry Pi
+  * Connect wiring harness to factory speaker outputs
+  * Connect constant power input to battery
+  * Connect turn-on wire to ignition signal from old head unit
 
 Usage
 -----
