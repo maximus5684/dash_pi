@@ -13,15 +13,15 @@ Requirements
 * [MicroSD Card - Class 10](https://www.amazon.com/Sandisk-Ultra-Memory-MicroSDHC-SDSQUNC-032G-AN6IA/dp/B011Z77M0C/) At least 32GB recommended [$15]
 * [Mini-Box DCDC-USB Power Supply](http://www.mini-box.com/DCDC-USB) [$55]
 * [Mini-Box DCDC-USB Enclosure](http://www.mini-box.com/DCDC-USB-ENCLOSURE) [optional - $4]
-* Audio Amplifier with RCA Input [$50 - $200]
+* Audio Amplifier with RCA Input - recommend [Lanzar Mini MAX 1600W Amplifier](https://www.amazon.com/LANZAR-MNX460-Mini-Max-MOSFET-Channel/dp/B00NYCMCES) [~$200]
 * Amplifier cable kit - recommend [BOSS Audio KIT10](https://www.amazon.com/Audio-Amplifier-Installation-Performance-Interconnect/dp/B0002VM8RU/) [$18]
 * [RCA Ground-loop Isolator](https://www.amazon.com/BOSS-Audio-B25N-Ground-Isolator/dp/B000LP4RMG/) [$5 - $7]
 
 ### Software ###
 
-* Raspbian Jessie with PIXEL Desktop
-* BlueZ 5
-* PulseAduio 5
+* Raspbian Jessie with no GUI
+
+See the docs folder for further information on system setup.
 
 Installation
 ------------
@@ -54,6 +54,13 @@ http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf
   * Connect wiring harness to factory speaker outputs
   * Connect constant power input to battery
   * Connect turn-on wire to ignition signal from old head unit
+* Put together Raspberry Pi, Raspberry Pi Touch Monitor, and HifiBerry DAC+
+* Install stock Raspbian Jessie on RPi
+* Build low-latency kernel and install on RPi
+* Configure for use as Bluetooth A2DP sink
+* Install [sfml-pi](https://github.com/mickelson/sfml-pi)
+* Build and install Dash Pi
+* Configure RPi to launch Dash Pi on boot
 
 Usage
 -----
