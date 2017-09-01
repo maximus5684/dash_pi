@@ -57,7 +57,7 @@ http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf
 * Put together Raspberry Pi, Raspberry Pi Touch Monitor, and HifiBerry DAC+
 * Install stock Raspbian Jessie on RPi
 * Build low-latency kernel and install on RPi
-* Configure for use as Bluetooth A2DP sink
+* Configure for use as Bluetooth A2DP sink with [Super-Simple-Raspberry-Pi-Audio-Receiver-Install](https://github.com/BaReinhard/Super-Simple-Raspberry-Pi-Audio-Receiver-Install)
 * Install [sfml-pi](https://github.com/mickelson/sfml-pi)
 * Build and install Dash Pi
 * Configure RPi to launch Dash Pi on boot
