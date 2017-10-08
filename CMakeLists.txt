@@ -3,15 +3,29 @@ project(dash_pi)
 
 add_definitions(-std=c++11)
 
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+find_package(SFML 2 REQUIRED COMPONENTS
+  system
+  window
+  graphics
+  audio
+)
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 include_directories (
   include
+  ${SFML_INCLUDE_DIR}
 )
 
-add_executable (
+add_executable(
   ${PROJECT_NAME}
   src/main.cpp
+)
+
+target_link_libraries(
+  ${PROJECT_NAME}
+  ${SFML_LIBRARIES}
 )
