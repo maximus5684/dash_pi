@@ -675,11 +675,9 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 
--------------- MIT License (BluePlayer) --------------
+-------------- MIT License (cxxopts, BluePlayer) --------------
 
 The MIT License (MIT)
-
-Copyright (c) 2015, Douglas Otwell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
