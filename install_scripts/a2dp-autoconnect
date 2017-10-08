@@ -1,0 +1,18 @@
+#!/bin/bash
+# At each BT connection/disconnection start/stop the service bluealsa-aplay
+function log
+{
+  sudo echo "[$(date)]: $*" >> /var/log/a2dp-autoconnect
+}
+BTMAC=${NAME//\"/}
+if [ $ACTION == "remove" ]
+then
+  log "Stop Played Connection " $BTMAC
+  sudo systemctl stop bluealsa-aplay@$BTMAC
+elif [ $ACTION == "add" ]
+then
+  log "Start Played Connection " $BTMAC
+  sudo systemctl start bluealsa-aplay@$BTMAC
+else
+  log "Other action " $ACTION
+fi

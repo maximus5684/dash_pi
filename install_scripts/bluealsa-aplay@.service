@@ -1,0 +1,10 @@
+[Unit]
+Description=BlueAlsa-Aplay %I -dhw:0,0
+Requires=bluetooth.service bluealsa.service
+[Service]
+Type=simple
+User=pi
+Group=audio
+ExecStart=/usr/local/bin/bluealsa-aplay %I -dhw:0,0
+[Install]
+WantedBy=multi-user.target

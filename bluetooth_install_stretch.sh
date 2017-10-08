@@ -16,6 +16,8 @@ tst sudo chmod +x /usr/local/bin/volume-watcher.py
 tst sudo cp install_scripts/volume-watcher.service /lib/systemd/system/volume-watcher.service
 tst sudo systemctl enable volume-watcher
 
+tst sudo cp install_scripts/bluealsa-aplay@.service /lib/systemd/system/bluealsa-aplay@.service
+
 echo "PRETTY_HOSTNAME=$BT_NAME" >> /tmp/machine-info
 tst sudo cp /tmp/machine-info /etc
 
@@ -29,14 +31,18 @@ tst sudo chmod 755 /usr/local/bin/bluez-udev
 tst sudo cp install_scripts/simple-agent.autotrust /usr/local/bin
 tst sudo chmod 755 /usr/local/bin/simple-agent.autotrust
 
+tst sudo cp install_scripts/a2dp-autoconnect /usr/local/bin
+tst sudo chmod 755 /usr/local/bin/a2dp-autoconnect
+
 sudo patch /boot/config.txt << EOT
-@@ -54,3 +54,6 @@
+@@ -54,3 +54,7 @@
  
  # Enable audio (loads snd_bcm2835)
  dtparam=audio=on
 +
 +# High Quality audio patch
 +audio_pwm_mode=2
++dtoverlay=pi3-disable-wifi
 EOT
 
 if [ -f /etc/udev/rules.d/99-com.rules ]; then
@@ -44,9 +50,10 @@ if [ -f /etc/udev/rules.d/99-com.rules ]; then
 sudo patch /etc/udev/rules.d/99-com.rules << EOT
 ***************
 *** 1 ****
---- 1,2,3 ----
+--- 1,2,3,4 ----
   SUBSYSTEM=="input", GROUP="input", MODE="0660"
 + KERNEL=="input[0-9]*", RUN+="/usr/local/bin/bluez-udev"
++ KERNEL=="input[0-9]*", RUN+="/usr/local/bin/a2dp-autoconnect"
 + ACTION=="add", KERNEL=="hci0", ENV{SYSTEMD_WANTS}+="bluealsa.service"
 EOT
 
@@ -57,6 +64,8 @@ tst sudo chmod 666 /etc/udev/rules.d/99-com.rules
 sudo cat  << EOT > /etc/udev/rules.d/99-input.rules
 SUBSYSTEM=="input", GROUP="input", MODE="0660"
 KERNEL=="input[0-9]*", RUN+="/usr/local/bin/bluez-udev"
+KERNEL=="input[0-9]*", RUN+="/usr/local/bin/a2dp-autoconnect"
+ACTION=="add", KERNEL=="hci0", ENV{SYSTEMD_WANTS}+="bluealsa.service"
 EOT
 
 fi
