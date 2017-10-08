@@ -3,6 +3,16 @@
 using namespace sf;
 using namespace DashPi;
 
+AudioState audio_state = AudioState::PAUSED;
+
+void toggle_audio_state()
+{
+  if (audio_state == AudioState::PAUSED)
+    audio_state = AudioState::PLAYING;
+  else if (audio_state == AudioState::PLAYING)
+    audio_state = AudioState::PAUSED;
+}
+
 int main (int argc, char * argv[])
 {
   bool debug = false;
@@ -49,17 +59,45 @@ int main (int argc, char * argv[])
   
   RenderWindow window(vm, "Dash Pi", sf::Style::Fullscreen);
 
+  //Set up the UI elements.
+  NavBar nav_bar;
+  nav_bar.create(window_width, (window_height * 0.075));
+
+  ControlBar control_bar;
+  control_bar.create(window_width, (window_height * 0.15));
+
   while (window.isOpen())
   {
     sf::Event event;
 
+    //Check for window events.
     while (window.pollEvent(event))
     {
       if (event.type == Event::Closed)
         window.close();
+
+      if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space)
+        toggle_audio_state();
     }
 
-    window.clear(Color::Blue);
+    //Render the nav bar.
+    nav_bar.drawElements();
+    nav_bar.display();
+
+    //Render the control bar.
+    control_bar.setAudioState(audio_state);
+    control_bar.drawElements();
+    control_bar.display();
+
+    window.clear();
+
+    //Draw the basic UI elements.
+    Sprite nav_bar_sprite(nav_bar.getTexture());
+    window.draw(nav_bar_sprite);
+
+    Sprite control_bar_sprite(control_bar.getTexture());
+    control_bar_sprite.setPosition(0, (window_height - control_bar_sprite.getGlobalBounds().height));
+    window.draw(control_bar_sprite);
 
     window.display();
   }

@@ -23,6 +23,8 @@ include_directories (
 add_executable(
   ${PROJECT_NAME}
   src/main.cpp
+  src/nav_bar.cpp
+  src/control_bar.cpp
 )
 
 target_link_libraries(

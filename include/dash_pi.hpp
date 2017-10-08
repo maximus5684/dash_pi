@@ -1,14 +1,12 @@
 #ifndef DASH_PI_HPP
 #define DASH_PI_HPP
 
-#include <vector>
 #include <iostream>
 
 #include <cxxopts.hpp>
-#include <SFML/Graphics.hpp>
+#include <components/nav_bar.hpp>
+#include <components/control_bar.hpp>
 
-namespace DashPi
-{
-}
+#include <SFML/Graphics.hpp>
 
 #endif
