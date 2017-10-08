@@ -6,6 +6,7 @@ using namespace DashPi;
 int main (int argc, char * argv[])
 {
   bool debug = false;
+  float window_width, window_height;
   cxxopts::Options options("dash_pi", "A full media center for your vehicle dash running on a Raspberry Pi!");
 
   //Try to parse the command-line arguments.
@@ -42,6 +43,9 @@ int main (int argc, char * argv[])
 
   if (debug)
     std::cout << "Screen mode is valid: " << vm.isValid() << " Size: " << vm.width << " x " << vm.height << "." << std::endl;
+
+  window_width = vm.width;
+  window_height = vm.height;
   
   RenderWindow window(vm, "Dash Pi", sf::Style::Fullscreen);
 
