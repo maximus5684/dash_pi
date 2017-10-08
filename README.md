@@ -43,9 +43,7 @@ need to set the following jumpers:
 
 This will configure the power supply for Automotive mode, 5V output, and a 5 second
 shutdown signal delay with a 60 second shutdown wait time. For more information on
-jumper configuration, see the manual here:
-
-http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf
+jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf).
 
 ### Basic Steps ###
 
@@ -76,3 +74,5 @@ were re-used in whole or part for this project:
 * BluePlayer [https://github.com/Douglas6/blueplayer] - Bluetooth A2DP and AVRCP Functions
 * POTSBLIZ [https://github.com/long-exposure/potsbliz-src] - Bluetooth HFP Functions
 * PyOBEX [https://bitbucket.org/dboddie/pyobex] - Bluetooth PBAP Functions
+
+The primary project is licensed under the GNU GPLv3.
