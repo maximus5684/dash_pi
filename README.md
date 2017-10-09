@@ -45,7 +45,7 @@ This will configure the power supply for Automotive mode, 5V output, and a 5 sec
 shutdown signal delay with a 60 second shutdown wait time. For more information on
 jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf).
 
-### Basic Steps ###
+### Basic Steps (OS-independent) ###
 
 * Remove factory stereo head unit
 * Install amplifier within cable-reach of Raspberry Pi
@@ -53,9 +53,27 @@ jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-
   * Connect constant power input to battery
   * Connect turn-on wire to ignition signal from old head unit
 * Put together Raspberry Pi, Raspberry Pi Touch Monitor, and HifiBerry DAC+
+
+### Basic Steps - Raspbian Jessie ###
+
 * Install stock Raspbian Jessie on RPi
-* Build low-latency kernel and install on RPi
+* Update everything (apt-get, rpi-update)
+* Install newer version of PulseAudio to fix drop-out bug
 * Configure for use as Bluetooth A2DP sink with [Super-Simple-Raspberry-Pi-Audio-Receiver-Install](https://github.com/BaReinhard/Super-Simple-Raspberry-Pi-Audio-Receiver-Install)
+* Install [sfml-pi](https://github.com/mickelson/sfml-pi)
+* Build and install Dash Pi
+* Configure RPi to launch Dash Pi on boot
+
+### Basic Steps - Raspbian Stretch ###
+
+* Install stock Raspbian Stretch on RPi
+* Update everything (apt-get, rpi-update)
+* Install prerequisites:
+  * `sudo apt update && sudo apt install python-bluez`
+* Add pi user to bluetooth group:
+  * `sudo adduser pi bluetooth`
+  * `sudo reboot`
+* Run bluetooth_install_stretch.sh from dash_pi
 * Install [sfml-pi](https://github.com/mickelson/sfml-pi)
 * Build and install Dash Pi
 * Configure RPi to launch Dash Pi on boot
