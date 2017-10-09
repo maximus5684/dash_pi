@@ -69,11 +69,12 @@ jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-
 * Install stock Raspbian Stretch on RPi
 * Update everything (apt-get, rpi-update)
 * Install prerequisites:
-  * `sudo apt update && sudo apt install python-bluez`
+  * `sudo apt update`
+  * `sudo apt install python-bluez cmake libflac-dev libogg-dev libvorbis-dev libopenal-dev libjpeg8-dev libfreetype6-dev libudev-dev libraspberrypi-dev`
 * Add pi user to bluetooth group:
   * `sudo adduser pi bluetooth`
   * `sudo reboot`
-* Run bluetooth_install_stretch.sh from dash_pi
+* Run install_scripts/install_bluetooth_raspbian_stretch.sh from dash_pi
 * Install [sfml-pi](https://github.com/mickelson/sfml-pi)
 * Build and install Dash Pi
 * Configure RPi to launch Dash Pi on boot

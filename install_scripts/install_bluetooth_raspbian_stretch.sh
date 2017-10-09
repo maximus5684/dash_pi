@@ -11,27 +11,27 @@ function tst
   fi
 }
 
-tst sudo cp install_scripts/volume-watcher.py /usr/local/bin/volume-watcher.py
+tst sudo cp volume-watcher.py /usr/local/bin/volume-watcher.py
 tst sudo chmod +x /usr/local/bin/volume-watcher.py
-tst sudo cp install_scripts/volume-watcher.service /lib/systemd/system/volume-watcher.service
+tst sudo cp volume-watcher.service /lib/systemd/system/volume-watcher.service
 tst sudo systemctl enable volume-watcher
 
-tst sudo cp install_scripts/bluealsa-aplay@.service /lib/systemd/system/bluealsa-aplay@.service
+tst sudo cp bluealsa-aplay@.service /lib/systemd/system/bluealsa-aplay@.service
 
 echo "PRETTY_HOSTNAME=$BT_NAME" >> /tmp/machine-info
 tst sudo cp /tmp/machine-info /etc
 
-#tst sudo cp install_scripts/bluetooth-agent /etc/init.d
+#tst sudo cp bluetooth-agent /etc/init.d
 #tst sudo chmod +x /etc/init.d/bluetooth-agent
 #tst sudo update-rc.d bluetooth-agent defaults
 
-tst sudo cp install_scripts/bluez-udev /usr/local/bin
+tst sudo cp bluez-udev /usr/local/bin
 tst sudo chmod 755 /usr/local/bin/bluez-udev
 
-#tst sudo cp install_scripts/simple-agent.autotrust /usr/local/bin
+#tst sudo cp simple-agent.autotrust /usr/local/bin
 #tst sudo chmod 755 /usr/local/bin/simple-agent.autotrust
 
-tst sudo cp install_scripts/a2dp-autoconnect /usr/local/bin
+tst sudo cp a2dp-autoconnect /usr/local/bin
 tst sudo chmod 755 /usr/local/bin/a2dp-autoconnect
 
 sudo patch /boot/config.txt << EOT
