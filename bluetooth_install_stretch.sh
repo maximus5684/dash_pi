@@ -21,40 +21,46 @@ tst sudo cp install_scripts/bluealsa-aplay@.service /lib/systemd/system/bluealsa
 echo "PRETTY_HOSTNAME=$BT_NAME" >> /tmp/machine-info
 tst sudo cp /tmp/machine-info /etc
 
-tst sudo cp install_scripts/bluetooth-agent /etc/init.d
-tst sudo chmod +x /etc/init.d/bluetooth-agent
-tst sudo update-rc.d bluetooth-agent defaults
+#tst sudo cp install_scripts/bluetooth-agent /etc/init.d
+#tst sudo chmod +x /etc/init.d/bluetooth-agent
+#tst sudo update-rc.d bluetooth-agent defaults
 
 tst sudo cp install_scripts/bluez-udev /usr/local/bin
 tst sudo chmod 755 /usr/local/bin/bluez-udev
 
-tst sudo cp install_scripts/simple-agent.autotrust /usr/local/bin
-tst sudo chmod 755 /usr/local/bin/simple-agent.autotrust
+#tst sudo cp install_scripts/simple-agent.autotrust /usr/local/bin
+#tst sudo chmod 755 /usr/local/bin/simple-agent.autotrust
 
 tst sudo cp install_scripts/a2dp-autoconnect /usr/local/bin
 tst sudo chmod 755 /usr/local/bin/a2dp-autoconnect
 
 sudo patch /boot/config.txt << EOT
-@@ -54,3 +54,7 @@
+--- a/config.txt.orig
++++ b/config.txt
+@@ -53,4 +53,7 @@ disable_overscan=0
+ # Additional overlays and parameters are documented /boot/overlays/README
  
  # Enable audio (loads snd_bcm2835)
- dtparam=audio=on
+-dtoverlay=audio=on
 +
-+# High Quality audio patch
-+audio_pwm_mode=2
++start_x=0
 +dtoverlay=pi3-disable-wifi
++dtoverlay=hifiberry-dacplus
 EOT
 
 if [ -f /etc/udev/rules.d/99-com.rules ]; then
 
 sudo patch /etc/udev/rules.d/99-com.rules << EOT
-***************
-*** 1 ****
---- 1,2,3,4 ----
-  SUBSYSTEM=="input", GROUP="input", MODE="0660"
-+ KERNEL=="input[0-9]*", RUN+="/usr/local/bin/bluez-udev"
-+ KERNEL=="input[0-9]*", RUN+="/usr/local/bin/a2dp-autoconnect"
-+ ACTION=="add", KERNEL=="hci0", ENV{SYSTEMD_WANTS}+="bluealsa.service"
+--- 99-com.rules.orig	2016-03-21 13:43:23.000000000 +0000
++++ 99-com.rules	2017-10-09 04:47:30.295659049 +0000
+@@ -1,4 +1,7 @@
+ SUBSYSTEM=="input", GROUP="input", MODE="0660"
++KERNEL=="input[0-9]*", RUN+="/usr/local/bin/bluez-udev"
++KERNEL=="input[0-9]*", RUN+="/usr/local/bin/a2dp-autoconnect"
++ACTION=="add", KERNEL=="hci0", ENV{SYSTEMD_WANTS}+="bluealsa.service"
+ SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
+ SUBSYSTEM=="spidev", GROUP="spi", MODE="0660"
+ SUBSYSTEM=="bcm2835-gpiomem", GROUP="gpio", MODE="0660"
 EOT
 
 else
@@ -73,26 +79,28 @@ fi
 tst sudo chmod 644 /etc/udev/rules.d/99-com.rules
 
 sudo patch /etc/bluetooth/main.conf << eot
-***************
-*** 7,8 ****
---- 7,9 ----
-  #name = %h-%d
-+ name = ${bt_name}
-
-***************
-*** 11,12 ****
---- 12,14 ----
-  #class = 0x000100
-+ class = 0x200414
-
-***************
-*** 15,17 ****
-  # 0 = disable timer, i.e. stay discoverable forever
-! #discoverabletimeout = 0
-
---- 17,19 ----
-  # 0 = disable timer, i.e. stay discoverable forever
-! discoverabletimeout = 0
+--- main.conf.orig	2017-04-05 11:33:37.000000000 +0000
++++ main.conf	2017-10-09 04:45:38.856824827 +0000
+@@ -2,16 +2,16 @@
+ 
+ # Default adapter name
+ # Defaults to 'BlueZ X.YZ'
+-#Name = BlueZ
++Name = raspberrypi
+ 
+ # Default device class. Only the major and minor device class bits are
+ # considered. Defaults to '0x000000'.
+-#Class = 0x000100
++Class = 0x200414
+ 
+ # How long to stay in discoverable mode before going back to non-discoverable
+ # The value is in seconds. Default is 180, i.e. 3 minutes.
+ # 0 = disable timer, i.e. stay discoverable forever
+-#DiscoverableTimeout = 0
++DiscoverableTimeout = 0
+ 
+ # How long to stay in pairable mode before going back to non-discoverable
+ # The value is in seconds. Default is 0.
 eot
 
 sleep 3

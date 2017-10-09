@@ -1,0 +1,13 @@
+diff --git a/config.txt.orig b/config.txt
+index dabc2a4..156f6f6 100755
+--- a/config.txt.orig
++++ b/config.txt
+@@ -53,4 +53,7 @@ disable_overscan=0
+ # Additional overlays and parameters are documented /boot/overlays/README
+ 
+ # Enable audio (loads snd_bcm2835)
+-dtoverlay=audio=on
++
++start_x=0
++dtoverlay=pi3-disable-wifi
++dtoverlay=hifiberry-dacplus

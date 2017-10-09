@@ -1,0 +1,10 @@
+--- 99-com.rules.orig	2016-03-21 13:43:23.000000000 +0000
++++ 99-com.rules	2017-10-09 04:47:30.295659049 +0000
+@@ -1,4 +1,7 @@
+ SUBSYSTEM=="input", GROUP="input", MODE="0660"
++KERNEL=="input[0-9]*", RUN+="/usr/local/bin/bluez-udev"
++KERNEL=="input[0-9]*", RUN+="/usr/local/bin/a2dp-autoconnect"
++ACTION=="add", KERNEL=="hci0", ENV{SYSTEMD_WANTS}+="bluealsa.service"
+ SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
+ SUBSYSTEM=="spidev", GROUP="spi", MODE="0660"
+ SUBSYSTEM=="bcm2835-gpiomem", GROUP="gpio", MODE="0660"

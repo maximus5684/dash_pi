@@ -1,0 +1,22 @@
+--- main.conf.orig	2017-04-05 11:33:37.000000000 +0000
++++ main.conf	2017-10-09 04:45:38.856824827 +0000
+@@ -2,16 +2,16 @@
+ 
+ # Default adapter name
+ # Defaults to 'BlueZ X.YZ'
+-#Name = BlueZ
++Name = raspberrypi
+ 
+ # Default device class. Only the major and minor device class bits are
+ # considered. Defaults to '0x000000'.
+-#Class = 0x000100
++Class = 0x200414
+ 
+ # How long to stay in discoverable mode before going back to non-discoverable
+ # The value is in seconds. Default is 180, i.e. 3 minutes.
+ # 0 = disable timer, i.e. stay discoverable forever
+-#DiscoverableTimeout = 0
++DiscoverableTimeout = 0
+ 
+ # How long to stay in pairable mode before going back to non-discoverable
+ # The value is in seconds. Default is 0.
