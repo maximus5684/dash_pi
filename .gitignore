@@ -5,4 +5,4 @@ bin/
 *.user
 *~
 .idea/
-install_scripts/sfml-pi
+install_scripts/depends

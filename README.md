@@ -58,25 +58,28 @@ jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-
 
 * Install stock Raspbian Jessie on RPi
 * Update everything (apt-get, rpi-update)
-* Install newer version of PulseAudio to fix drop-out bug
+* Install newer version of PulseAudio to fix drop-out bug (at least v6.0)
 * Configure for use as Bluetooth A2DP sink with [Super-Simple-Raspberry-Pi-Audio-Receiver-Install](https://github.com/BaReinhard/Super-Simple-Raspberry-Pi-Audio-Receiver-Install)
 * Install [sfml-pi](https://github.com/mickelson/sfml-pi)
 * Build and install Dash Pi
+  * cd dash_pi
+  * mkdir build && cd build
+  * cmake ..
+  * make
 * Configure RPi to launch Dash Pi on boot
 
 ### Basic Steps - Raspbian Stretch ###
 
 * Install stock Raspbian Stretch on RPi
 * Update everything (apt-get, rpi-update)
-* Install prerequisites:
-  * `sudo apt update`
-  * `sudo apt install python-bluez cmake libflac-dev libogg-dev libvorbis-dev libopenal-dev libjpeg8-dev libfreetype6-dev libudev-dev libraspberrypi-dev`
-* Add pi user to bluetooth group:
-  * `sudo adduser pi bluetooth`
-  * `sudo reboot`
-* Run install_scripts/install_bluetooth_raspbian_stretch.sh from dash_pi
-* Install [sfml-pi](https://github.com/mickelson/sfml-pi)
+* Install prereqs with install_scripts/install_prereqs.sh
+* Run install_scripts/install_bluetooth_raspbian_stretch.sh
+* Reboot
 * Build and install Dash Pi
+  * cd dash_pi
+  * mkdir build && cd build
+  * cmake ..
+  * make
 * Configure RPi to launch Dash Pi on boot
 
 Usage
