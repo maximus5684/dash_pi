@@ -4,7 +4,7 @@ using namespace DashPi;
 using namespace AlsaPlusPlus;
 
 AudioController::AudioController() :
-  _mx(new Mixer("default")),
+  _mx(new Mixer("default", "Digital")),
   _current_volume(0)
 {
 }
