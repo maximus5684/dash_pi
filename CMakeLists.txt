@@ -23,11 +23,15 @@ include_directories (
 add_executable(
   ${PROJECT_NAME}
   src/main.cpp
-  src/nav_bar.cpp
+  src/dash_pi_main.cpp
+  src/audio_controller.cpp
+  src/playback_controller.cpp
   src/control_bar.cpp
+  src/nav_bar.cpp
 )
 
 target_link_libraries(
   ${PROJECT_NAME}
+  AlsaPlusPlus
   ${SFML_LIBRARIES}
 )

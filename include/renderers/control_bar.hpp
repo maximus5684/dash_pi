@@ -12,13 +12,7 @@ namespace DashPi
       ControlBar();
       ~ControlBar();
 
-      void setAudioState(AudioState state);
-      AudioState getAudioState();
-      void drawElements();
-
-    private:
-      bool play_pause_enabled;
-      AudioState play_pause_state;
+      void drawElements(bool is_playing);
   };
 }
 

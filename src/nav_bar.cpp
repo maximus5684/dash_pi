@@ -1,12 +1,7 @@
-#include <components/nav_bar.hpp>
+#include <renderers/nav_bar.hpp>
 
+using namespace sf;
 using namespace DashPi;
-using sf::Color;
-using sf::Font;
-using sf::Text;
-using sf::Vector2f;
-using sf::Vector2u;
-using sf::RectangleShape;
 
 NavBar::NavBar() :
   RenderTexture()

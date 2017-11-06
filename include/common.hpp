@@ -6,7 +6,7 @@
 
 namespace DashPi
 {
-  enum AudioState
+  enum PlaybackState
   {
     PLAYING,
     PAUSED
