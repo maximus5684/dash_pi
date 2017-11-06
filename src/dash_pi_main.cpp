@@ -5,7 +5,8 @@ using namespace DashPi;
 
 DashPiMain::DashPiMain(bool debug_enabled) :
   _debug(debug_enabled),
-  _ac(new AudioController())
+  _ac(new AudioController()),
+  _pc(new PlaybackController())
 {
 }
 

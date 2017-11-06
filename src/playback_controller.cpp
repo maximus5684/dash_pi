@@ -2,9 +2,9 @@
 
 using namespace DashPi;
 
-PlaybackController::PlaybackController() :
-  _ps()
+PlaybackController::PlaybackController()
 {
+  _ps = PlaybackState::PAUSED;
 }
 
 PlaybackState PlaybackController::getPlaybackState()
