@@ -4,9 +4,20 @@ using namespace DashPi;
 using namespace AlsaPlusPlus;
 
 VolumeController::VolumeController() :
-  _mx(new Mixer("default", "Digital")),
   _current_volume(0)
 {
+  if (Mixer::element_exists("default", "Digital"))
+  {
+    _mx = std::unique_ptr<Mixer>(new Mixer("default", "Digital"));
+  }
+  else if (Mixer::element_exists("default", "Master"))
+  {
+    _mx = std::unique_ptr<Mixer>(new Mixer("default", "Master"));
+  }
+  else
+  {
+    _mx = NULL;
+  }
 }
 
 void VolumeController::down()
