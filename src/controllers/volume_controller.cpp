@@ -11,12 +11,12 @@ VolumeController::VolumeController() :
 
 void VolumeController::down()
 {
-  _current_volume = _mx->dec_vol_pct(1.0);
+  _current_volume = _mx->dec_vol_pct(0.05);
 }
 
 void VolumeController::up()
 {
-  _current_volume = _mx->inc_vol_pct(1.0);
+  _current_volume = _mx->inc_vol_pct(0.05);
 }
 
 void VolumeController::mute()
