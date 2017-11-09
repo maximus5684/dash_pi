@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include <controllers/audio_controller.hpp>
+#include <controllers/volume_controller.hpp>
 #include <controllers/playback_controller.hpp>
 #include <renderers/nav_bar.hpp>
 #include <renderers/control_bar.hpp>
@@ -24,8 +24,8 @@ namespace DashPi
       bool _debug;
       unsigned int window_width,
                    window_height;
-      std::unique_ptr<AudioController> _ac;
       std::unique_ptr<PlaybackController> _pc;
+      std::unique_ptr<VolumeController> _vc;
   };
 }
 

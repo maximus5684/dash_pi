@@ -6,15 +6,15 @@
 
 namespace DashPi
 {
-  class AudioController
+  class VolumeController
   {
     public:
-      AudioController();
+      VolumeController();
 
-      void decreaseVolume();
-      void increaseVolume();
-      void muteVolume();
-      void unmuteVolume();
+      void down();
+      void up();
+      void mute();
+      void unmute();
 
     private:
       std::unique_ptr<AlsaPlusPlus::Mixer> _mx;

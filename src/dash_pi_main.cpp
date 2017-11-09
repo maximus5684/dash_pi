@@ -5,8 +5,8 @@ using namespace DashPi;
 
 DashPiMain::DashPiMain(bool debug_enabled) :
   _debug(debug_enabled),
-  _ac(new AudioController()),
-  _pc(new PlaybackController())
+  _pc(new PlaybackController()),
+  _vc(new VolumeController())
 {
 }
 
@@ -46,12 +46,27 @@ void DashPiMain::run()
       if (event.type == Event::Closed)
         window.close();
 
-      if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space)
+      if (event.type == Event::KeyPressed)
       {
-        if (_pc->getPlaybackState() == PlaybackState::PAUSED)
-          _pc->resumePlayback();
-        else
-          _pc->pausePlayback();
+        if (event.key.code == Keyboard::Space)
+        {
+          if (_pc->getPlaybackState() == PlaybackState::PAUSED)
+            _pc->resumePlayback();
+          else
+            _pc->pausePlayback();
+        }
+        else if (event.key.code == Keyboard::Up)
+        {
+          _vc->up();
+        }
+        else if (event.key.code == Keyboard::Down)
+        {
+          _vc->down();
+        }
+      }
+
+      if (event.type == Event::TouchBegan)
+      {
       }
     }
 

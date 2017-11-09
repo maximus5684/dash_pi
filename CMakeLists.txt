@@ -24,10 +24,10 @@ add_executable(
   ${PROJECT_NAME}
   src/main.cpp
   src/dash_pi_main.cpp
-  src/audio_controller.cpp
-  src/playback_controller.cpp
-  src/control_bar.cpp
-  src/nav_bar.cpp
+  src/controllers/playback_controller.cpp
+  src/controllers/volume_controller.cpp
+  src/renderers/control_bar.cpp
+  src/renderers/nav_bar.cpp
 )
 
 target_link_libraries(
