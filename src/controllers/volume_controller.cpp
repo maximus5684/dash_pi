@@ -3,8 +3,7 @@
 using namespace DashPi;
 using namespace AlsaPlusPlus;
 
-VolumeController::VolumeController() :
-  _current_volume(0)
+VolumeController::VolumeController()
 {
   if (Mixer::element_exists("default", "Digital"))
   {
@@ -18,6 +17,8 @@ VolumeController::VolumeController() :
   {
     _mx = NULL;
   }
+
+  _current_volume = _mx->get_cur_vol_pct();
 }
 
 void VolumeController::down()
@@ -38,4 +39,9 @@ void VolumeController::mute()
 void VolumeController::unmute()
 {
   _current_volume = _mx->unmute();
+}
+
+float VolumeController::getCurrentVolume()
+{
+  return _current_volume;
 }

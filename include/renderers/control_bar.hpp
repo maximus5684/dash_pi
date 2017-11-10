@@ -3,6 +3,7 @@
 
 #include <common.hpp>
 #include <SFML/Graphics.hpp>
+#include <controllers/volume_controller.hpp>
 
 namespace DashPi
 {
@@ -12,7 +13,19 @@ namespace DashPi
       ControlBar();
       ~ControlBar();
 
-      void drawElements(bool is_playing);
+      bool create(unsigned int width, unsigned int height, bool depthBuffer=false);
+      void handleEvent(sf::Event event);
+      void drawElements(PlaybackState current_state);
+
+    private:
+      std::unique_ptr<VolumeController> _vc;
+      sf::RenderTexture controls,
+                        play_pause,
+                        mute;
+      sf::CircleShape play_pause_btn;
+      sf::Sprite controls_sprite,
+                 play_pause_sprite,
+                 mute_sprite;
   };
 }
 

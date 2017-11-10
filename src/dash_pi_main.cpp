@@ -5,8 +5,7 @@ using namespace DashPi;
 
 DashPiMain::DashPiMain(bool debug_enabled) :
   _debug(debug_enabled),
-  _pc(new PlaybackController()),
-  _vc(new VolumeController())
+  _pc(new PlaybackController())
 {
 }
 
@@ -55,14 +54,6 @@ void DashPiMain::run()
           else
             _pc->pausePlayback();
         }
-        else if (event.key.code == Keyboard::Up)
-        {
-          _vc->up();
-        }
-        else if (event.key.code == Keyboard::Down)
-        {
-          _vc->down();
-        }
       }
 
       if (event.type == Event::TouchBegan)
@@ -76,7 +67,7 @@ void DashPiMain::run()
 
     //Render the control bar.
     PlaybackState current_state = _pc->getPlaybackState();
-    control_bar.drawElements(current_state == PlaybackState::PLAYING);
+    control_bar.drawElements(current_state);
     control_bar.display();
 
     window.clear();

@@ -15,6 +15,7 @@ namespace DashPi
       void up();
       void mute();
       void unmute();
+      float getCurrentVolume();
 
     private:
       std::unique_ptr<AlsaPlusPlus::Mixer> _mx;

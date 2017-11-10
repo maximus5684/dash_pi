@@ -4,7 +4,8 @@ using namespace sf;
 using namespace DashPi;
 
 ControlBar::ControlBar() :
-  RenderTexture()
+  RenderTexture(),
+  _vc(new VolumeController)
 {
 }
 
@@ -12,67 +13,115 @@ ControlBar::~ControlBar()
 {
 }
 
-void ControlBar::drawElements(bool is_playing)
+bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffer)
 {
-  Vector2u size = getSize();
-  float text_vert_offset = size.y * 0.1;
-  RenderTexture controls, play_pause;
+  //We have to initialize everything up-front so we can tell
+  //whether a touch event has happened within the bounds of
+  //the controls.
 
-  //Create the control buttons.
-  controls.create((float)size.x, (float)size.y * 0.75);
-  controls.clear(Color(150, 150, 150, 255));
-  controls.display();
+  //Create the control bar background.
+  controls.create((float)width, (float)height * 0.75);
 
-  //Create the play/pause button.
-  play_pause.create((float)size.y, (float)size.y);
+  controls_sprite.setTexture(controls.getTexture());
+  controls_sprite.setPosition(0, (float)height - controls_sprite.getGlobalBounds().height);
 
+  //Create the play/pause button texture.
+  play_pause.create((float)height, (float)height);
+
+  Vector2u controls_size = controls.getSize();
   Vector2u play_pause_size = play_pause.getSize();
 
-  CircleShape play_pause_btn((float)play_pause_size.y / 2.0);
+  //Define the play/pause button.
+  play_pause_btn.setRadius((float)play_pause_size.y * 0.5);
   play_pause_btn.setFillColor(Color::Blue);
   play_pause_btn.setOutlineColor(Color::White);
   play_pause_btn.setOutlineThickness(-2.0);
 
+  //Create the sprite to hold the play/pause texture.
+  play_pause_sprite.setTexture(play_pause.getTexture());
+  play_pause_sprite.setOrigin(play_pause_sprite.getGlobalBounds().width * 0.5, play_pause_sprite.getGlobalBounds().height * 0.5);
+  play_pause_sprite.setPosition((float)width * 0.5, (float)height * 0.5);
+
+  //Create the mute button texture.
+  mute.create(controls_size.y, controls_size.y);
+
+  //Create the sprite to hold the mute button texture.
+  mute_sprite.setTexture(mute.getTexture());
+  mute_sprite.setOrigin(mute_sprite.getGlobalBounds().width, mute_sprite.getGlobalBounds().height); //Bottom right
+  mute_sprite.setPosition((float)width, (float)height);
+
+  return RenderTexture::create(width, height, depthBuffer);
+}
+
+void ControlBar::handleEvent(sf::Event event)
+{
+  if (event.type == Event::TouchBegan)
+  {
+    if (event.touch.x > mute_sprite.getGlobalBounds().left &&
+        event.touch.y > mute_sprite.getGlobalBounds().top)
+    {
+      if (_vc->getCurrentVolume() == 0)
+      {
+        _vc->unmute();
+      }
+      else
+      {
+        _vc->mute();
+      }
+    }
+  }
+}
+
+void ControlBar::drawElements(PlaybackState current_state)
+{
+  Vector2u size = getSize();
+  Vector2u play_pause_size = play_pause.getSize();
+
+  controls.clear(Color(150, 150, 150, 255));
+  controls.display();
+
   play_pause.draw(play_pause_btn);
 
   //Create a play or pause icon.
-  if (is_playing)
+  if (current_state == PlaybackState::PAUSED)
   {
     ConvexShape play_icon;
     play_icon.setPointCount(3);
     play_icon.setPoint(0, Vector2f(0, 0));
-    play_icon.setPoint(1, Vector2f((float)play_pause_size.x / 2.0, (float)play_pause_size.y / 4.0));
-    play_icon.setPoint(2, Vector2f(0, (float)play_pause_size.y / 2.0));
+    play_icon.setPoint(1, Vector2f((float)play_pause_size.x * 0.5, (float)play_pause_size.y * 0.25));
+    play_icon.setPoint(2, Vector2f(0, (float)play_pause_size.y * 0.5));
     play_icon.setFillColor(Color::White);
-    play_icon.setOrigin((float)play_icon.getGlobalBounds().width / 2.0, (float)play_icon.getGlobalBounds().height / 2.0);
-    play_icon.setPosition((float)play_pause_size.x / 2.0 + (float)play_pause_size.x * 0.05, (float)play_pause_size.y / 2.0);
+    play_icon.setOrigin((float)play_icon.getGlobalBounds().width * 0.5, (float)play_icon.getGlobalBounds().height * 0.5);
+    play_icon.setPosition((float)play_pause_size.x * 0.5 + (float)play_pause_size.x * 0.05, (float)play_pause_size.y * 0.5);
     play_pause.draw(play_icon);
   }
-  else
+  else if (current_state == PlaybackState::PLAYING)
   {
     RectangleShape pause_icon(Vector2f(play_pause_size.x * 0.2, play_pause_size.y * 0.5));
     pause_icon.setFillColor(Color::White);
-    pause_icon.setOrigin((float)pause_icon.getGlobalBounds().width / 2.0, (float)pause_icon.getGlobalBounds().height / 2.0);
+    pause_icon.setOrigin((float)pause_icon.getGlobalBounds().width * 0.5, (float)pause_icon.getGlobalBounds().height * 0.5);
 
-    pause_icon.setPosition((float)play_pause_size.x / 2.0 - (float)play_pause_size.x * 0.15, (float)play_pause_size.y / 2.0);
+    pause_icon.setPosition((float)play_pause_size.x * 0.5 - (float)play_pause_size.x * 0.15, (float)play_pause_size.y * 0.5);
     play_pause.draw(pause_icon);
 
-    pause_icon.setPosition((float)play_pause_size.x / 2.0 + (float)play_pause_size.x * 0.15, (float)play_pause_size.y / 2.0);
+    pause_icon.setPosition((float)play_pause_size.x * 0.5 + (float)play_pause_size.x * 0.15, (float)play_pause_size.y * 0.5);
     play_pause.draw(pause_icon);
   }
+
+  mute.clear(Color::Red);
+  mute.display();
 
   //Clear the texture.
   clear();
 
-  Sprite controls_sprite(controls.getTexture());
-  controls_sprite.setPosition(0, (float)size.y - controls_sprite.getGlobalBounds().height);
-
+  controls_sprite.setTexture(controls.getTexture());
   draw(controls_sprite);
 
-  Sprite play_pause_sprite(play_pause.getTexture());
-  play_pause_sprite.setOrigin(play_pause_sprite.getGlobalBounds().width / 2.0, play_pause_sprite.getGlobalBounds().height / 2.0);
-  play_pause_sprite.setPosition((float)size.x / 2.0, (float)size.y / 2.0);
+  play_pause_sprite.setTexture(play_pause.getTexture());
   draw(play_pause_sprite);
+
+  mute_sprite.setTexture(mute.getTexture());
+  draw(mute_sprite);
 
   display();
 }
