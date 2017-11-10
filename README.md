@@ -60,7 +60,7 @@ jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-
 * Update everything (apt-get, rpi-update)
 * Install newer version of PulseAudio to fix drop-out bug (at least v6.0)
 * Configure for use as Bluetooth A2DP sink with [Super-Simple-Raspberry-Pi-Audio-Receiver-Install](https://github.com/BaReinhard/Super-Simple-Raspberry-Pi-Audio-Receiver-Install)
-* Install [sfml-pi](https://github.com/mickelson/sfml-pi)
+* Install [sfml-pi](https://github.com/maximus5684/sfml-pi)
 * Build and install Dash Pi
   * cd dash_pi
   * mkdir build && cd build
@@ -98,3 +98,8 @@ were re-used in whole or part for this project:
 * PyOBEX [https://bitbucket.org/dboddie/pyobex] - Bluetooth PBAP Functions
 
 The primary project is licensed under the GNU GPLv3.
+
+Acknowledgements
+-----
+
+Most icons created by [Alex Auda Samora from Noun Project](https://thenounproject.com/razerk/uploads/). Used under Creative Commons.
