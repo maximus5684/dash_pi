@@ -27,6 +27,7 @@ void DashPiMain::run()
   window_height = vm.height;
 
   RenderWindow window(vm, "Dash Pi", sf::Style::Fullscreen);
+  window.setFramerateLimit(60);
 
   //Set up the UI elements.
   NavBar nav_bar;
