@@ -43,11 +43,15 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   play_pause_sprite.setOrigin(play_pause_sprite.getGlobalBounds().width * 0.5, play_pause_sprite.getGlobalBounds().height * 0.5);
   play_pause_sprite.setPosition((float)width * 0.5, (float)height * 0.5);
 
-  //Create the mute button texture.
-  mute.create(controls_size.y, controls_size.y);
+  //Create the mute/unmute button texture.
+  mute_icon.loadFromFile("../icons/mute_128.png");
+  unmute_icon.loadFromFile("../icons/unmute_128.png");
+
+  Vector2u mute_size = mute_icon.getSize();
 
   //Create the sprite to hold the mute button texture.
-  mute_sprite.setTexture(mute.getTexture());
+  mute_sprite.setTexture(mute_icon);
+  mute_sprite.setScale(((float)controls_size.y / (float)mute_size.x), ((float)controls_size.y / (float)mute_size.y));
   mute_sprite.setOrigin(mute_sprite.getGlobalBounds().width, mute_sprite.getGlobalBounds().height); //Bottom right
   mute_sprite.setPosition((float)width, (float)height);
 
@@ -127,9 +131,6 @@ void ControlBar::drawElements(PlaybackState current_state)
     play_pause.draw(pause_icon);
   }
 
-  mute.clear(Color::Red);
-  mute.display();
-
   //Clear the texture.
   clear();
 
@@ -139,7 +140,15 @@ void ControlBar::drawElements(PlaybackState current_state)
   play_pause_sprite.setTexture(play_pause.getTexture());
   draw(play_pause_sprite);
 
-  mute_sprite.setTexture(mute.getTexture());
+  if (_vc->getCurrentVolume() == 0)
+  {
+    mute_sprite.setTexture(unmute_icon);
+  }
+  else
+  {
+    mute_sprite.setTexture(mute_icon);
+  }
+
   draw(mute_sprite);
 
   display();

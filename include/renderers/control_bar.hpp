@@ -21,9 +21,10 @@ namespace DashPi
     private:
       std::shared_ptr<PlaybackController> _pc;
       std::unique_ptr<VolumeController> _vc;
+      sf::Texture mute_icon,
+                  unmute_icon;
       sf::RenderTexture controls,
-                        play_pause,
-                        mute;
+                        play_pause;
       sf::CircleShape play_pause_btn;
       sf::Sprite controls_sprite,
                  play_pause_sprite,
