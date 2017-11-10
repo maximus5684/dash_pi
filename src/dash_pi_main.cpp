@@ -37,17 +37,6 @@ void DashPiMain::run()
 
   while (window.isOpen())
   {
-    sf::Event event;
-
-    //Check for window events.
-    while (window.pollEvent(event))
-    {
-      if (event.type == Event::Closed)
-        window.close();
-
-      control_bar.handleEvent(event);
-    }
-
     //Render the nav bar.
     nav_bar.drawElements();
     nav_bar.display();
@@ -68,5 +57,22 @@ void DashPiMain::run()
     window.draw(control_bar_sprite);
 
     window.display();
+
+    sf::Event event;
+
+    //Check for window events last.
+    while (window.pollEvent(event))
+    {
+      if (event.type == Event::Closed)
+        window.close();
+
+      if (event.type == Event::TouchBegan)
+      {
+        //Change to control_bar-local coordinates.
+        sf::Event::TouchEvent te = event.touch;
+        te.y -= control_bar_sprite.getGlobalBounds().top;
+        control_bar.handleEvent(te);
+      }
+    }
   }
 }

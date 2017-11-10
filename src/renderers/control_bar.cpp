@@ -54,40 +54,39 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   return RenderTexture::create(width, height, depthBuffer);
 }
 
-void ControlBar::handleEvent(sf::Event event)
+void ControlBar::handleEvent(sf::Event::TouchEvent touch)
 {
-  if (event.type == Event::TouchBegan)
+  Vector2u bar_size = getSize();
+  FloatRect pp_bounds = play_pause_sprite.getGlobalBounds();
+  FloatRect mute_bounds = mute_sprite.getGlobalBounds();
+
+  // Play/Pause Button
+  if (touch.x > pp_bounds.left &&
+      touch.x < (pp_bounds.left + pp_bounds.width) &&
+      touch.y > pp_bounds.top)
   {
-    FloatRect pp_bounds = play_pause_sprite.getGlobalBounds();
-    FloatRect mute_bounds = mute_sprite.getGlobalBounds();
-
-    // Play/Pause Button
-    if (event.touch.x > pp_bounds.left &&
-        event.touch.x < (pp_bounds.left + pp_bounds.width) &&
-        event.touch.y > pp_bounds.top)
+    if (_pc->getPlaybackState() == PlaybackState::PAUSED)
     {
-      if (_pc->getPlaybackState() == PlaybackState::PAUSED)
-      {
-        _pc->resumePlayback();
-      }
-      else if (_pc->getPlaybackState() == PlaybackState::PLAYING)
-      {
-        _pc->pausePlayback();
-      }
+      _pc->resumePlayback();
     }
-
-    // Mute Button
-    if (event.touch.x > mute_bounds.left &&
-        event.touch.y > mute_bounds.top)
+    else if (_pc->getPlaybackState() == PlaybackState::PLAYING)
     {
-      if (_vc->getCurrentVolume() == 0)
-      {
-        _vc->unmute();
-      }
-      else
-      {
-        _vc->mute();
-      }
+      _pc->pausePlayback();
+    }
+  }
+
+  // Mute Button
+  if (touch.x > mute_bounds.left &&
+      touch.x < (mute_bounds.left + mute_bounds.width) &&
+      touch.y > mute_bounds.top)
+  {
+    if (_vc->getCurrentVolume() == 0)
+    {
+      _vc->unmute();
+    }
+    else
+    {
+      _vc->mute();
     }
   }
 }

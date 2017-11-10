@@ -15,7 +15,7 @@ namespace DashPi
       ~ControlBar();
 
       bool create(unsigned int width, unsigned int height, bool depthBuffer=false);
-      void handleEvent(sf::Event event);
+      void handleEvent(sf::Event::TouchEvent touch);
       void drawElements(PlaybackState current_state);
 
     private:
