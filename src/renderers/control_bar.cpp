@@ -64,8 +64,7 @@ void ControlBar::handleEvent(sf::Event event)
     // Play/Pause Button
     if (event.touch.x > pp_bounds.left &&
         event.touch.x < (pp_bounds.left + pp_bounds.width) &&
-        event.touch.y > pp_bounds.top &&
-        event.touch.y < (pp_bounds.top + pp_bounds.height))
+        event.touch.y > pp_bounds.top)
     {
       if (_pc->getPlaybackState() == PlaybackState::PAUSED)
       {
