@@ -3,7 +3,7 @@
 using namespace sf;
 using namespace DashPi;
 
-ControlBar::ControlBar(std::shared_ptr<PlaybackController>& pc) :
+ControlBar::ControlBar(std::shared_ptr<PlaybackController> pc) :
   RenderTexture(),
   _pc(pc),
   _vc(new VolumeController)

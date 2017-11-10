@@ -11,7 +11,7 @@ namespace DashPi
   class ControlBar : public sf::RenderTexture
   {
     public:
-      ControlBar(std::shared_ptr<PlaybackController>& pc);
+      ControlBar(std::shared_ptr<PlaybackController> pc);
       ~ControlBar();
 
       bool create(unsigned int width, unsigned int height, bool depthBuffer=false);
