@@ -46,8 +46,8 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
 
   //Create the sprite to hold the play/pause icon.
   play_pause_icon_sprite.setTexture(playing_icon);
-  play_pause_icon_sprite.setScale(((float)height / (float)play_icon_size.x), ((float)height / (float)play_icon_size.y));
-  play_pause_icon_sprite.setOrigin((float)play_pause_icon_sprite.getGlobalBounds().width * 0.5, (float)play_pause_icon_sprite.getGlobalBounds().height * 0.5);
+  play_pause_icon_sprite.setScale(((float)height / (float)play_icon_size.x) * 0.75, ((float)height / (float)play_icon_size.y) * 0.75);
+  play_pause_icon_sprite.setOrigin((float)play_pause_icon_sprite.getLocalBounds().width * 0.5, (float)play_pause_icon_sprite.getLocalBounds().height * 0.5);
   play_pause_icon_sprite.setPosition((float)width * 0.5, (float)height * 0.5);
 
   //Create the mute/unmute button texture.
@@ -59,7 +59,7 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   //Create the sprite to hold the mute button texture.
   mute_sprite.setTexture(muted_icon);
   mute_sprite.setScale(((float)controls_size.y / (float)mute_size.x), ((float)controls_size.y / (float)mute_size.y));
-  mute_sprite.setOrigin(mute_sprite.getGlobalBounds().width, mute_sprite.getGlobalBounds().height); //Bottom right
+  mute_sprite.setOrigin(mute_sprite.getLocalBounds().width, mute_sprite.getLocalBounds().height); //Bottom right
   mute_sprite.setPosition((float)width, (float)height);
 
   return RenderTexture::create(width, height, depthBuffer);
