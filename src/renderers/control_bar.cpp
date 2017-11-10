@@ -31,8 +31,8 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   //Define the play/pause button.
   play_pause_btn.setRadius((float)height * 0.5);
   play_pause_btn.setFillColor(Color::Blue);
-  play_pause_btn.setOutlineColor(Color::White);
-  play_pause_btn.setOutlineThickness(-2.0);
+  //play_pause_btn.setOutlineColor(Color::Black);
+  //play_pause_btn.setOutlineThickness(-2.0);
   play_pause_btn.setOrigin((float)play_pause_btn.getGlobalBounds().width * 0.5, (float)play_pause_btn.getGlobalBounds().height * 0.5);
   play_pause_btn.setPosition((float)width * 0.5, (float)height * 0.5);
 
