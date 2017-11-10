@@ -51,9 +51,9 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
 
   //Create the sprite to hold the mute button texture.
   mute_sprite.setTexture(mute_icon);
-  mute_sprite.setScale(((float)controls_size.y / (float)mute_size.x), ((float)controls_size.y / (float)mute_size.y));
   mute_sprite.setOrigin(mute_sprite.getGlobalBounds().width, mute_sprite.getGlobalBounds().height); //Bottom right
   mute_sprite.setPosition((float)width, (float)height);
+  mute_sprite.setScale(((float)controls_size.y / (float)mute_size.x), ((float)controls_size.y / (float)mute_size.y));
 
   return RenderTexture::create(width, height, depthBuffer);
 }
