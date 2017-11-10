@@ -56,9 +56,7 @@ void DashPiMain::run()
         }
       }
 
-      if (event.type == Event::TouchBegan)
-      {
-      }
+      control_bar.handleEvent(event);
     }
 
     //Render the nav bar.
