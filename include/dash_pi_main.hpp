@@ -23,7 +23,7 @@ namespace DashPi
       bool _debug;
       unsigned int window_width,
                    window_height;
-      std::unique_ptr<PlaybackController> _pc;
+      std::shared_ptr<PlaybackController> _pc;
   };
 }
 

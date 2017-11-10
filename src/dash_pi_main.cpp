@@ -32,7 +32,7 @@ void DashPiMain::run()
   NavBar nav_bar;
   nav_bar.create(window_width, (window_height * 0.075));
 
-  ControlBar control_bar;
+  ControlBar control_bar(_pc);
   control_bar.create(window_width, (window_height * 0.15));
 
   while (window.isOpen())
@@ -44,17 +44,6 @@ void DashPiMain::run()
     {
       if (event.type == Event::Closed)
         window.close();
-
-      if (event.type == Event::KeyPressed)
-      {
-        if (event.key.code == Keyboard::Space)
-        {
-          if (_pc->getPlaybackState() == PlaybackState::PAUSED)
-            _pc->resumePlayback();
-          else
-            _pc->pausePlayback();
-        }
-      }
 
       control_bar.handleEvent(event);
     }

@@ -3,8 +3,9 @@
 using namespace sf;
 using namespace DashPi;
 
-ControlBar::ControlBar() :
+ControlBar::ControlBar(std::shared_ptr<PlaybackController>& pc) :
   RenderTexture(),
+  _pc(pc),
   _vc(new VolumeController)
 {
 }
@@ -57,8 +58,28 @@ void ControlBar::handleEvent(sf::Event event)
 {
   if (event.type == Event::TouchBegan)
   {
-    if (event.touch.x > mute_sprite.getGlobalBounds().left &&
-        event.touch.y > mute_sprite.getGlobalBounds().top)
+    FloatRect pp_bounds = play_pause_sprite.getGlobalBounds();
+    FloatRect mute_bounds = mute_sprite.getGlobalBounds();
+
+    // Play/Pause Button
+    if (event.touch.x > pp_bounds.left &&
+        event.touch.x < (pp_bounds.left + pp_bounds.width) &&
+        event.touch.y > pp_bounds.top &&
+        event.touch.y < (pp_bounds.top + pp_bounds.height))
+    {
+      if (_pc->getPlaybackState() == PlaybackState::PAUSED)
+      {
+        _pc->resumePlayback();
+      }
+      else if (_pc->getPlaybackState() == PlaybackState::PLAYING)
+      {
+        _pc->pausePlayback();
+      }
+    }
+
+    // Mute Button
+    if (event.touch.x > mute_bounds.left &&
+        event.touch.y > mute_bounds.top)
     {
       if (_vc->getCurrentVolume() == 0)
       {

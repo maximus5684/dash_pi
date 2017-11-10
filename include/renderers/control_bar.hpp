@@ -3,6 +3,7 @@
 
 #include <common.hpp>
 #include <SFML/Graphics.hpp>
+#include <controllers/playback_controller.hpp>
 #include <controllers/volume_controller.hpp>
 
 namespace DashPi
@@ -10,7 +11,7 @@ namespace DashPi
   class ControlBar : public sf::RenderTexture
   {
     public:
-      ControlBar();
+      ControlBar(std::shared_ptr<PlaybackController>& pc);
       ~ControlBar();
 
       bool create(unsigned int width, unsigned int height, bool depthBuffer=false);
@@ -18,6 +19,7 @@ namespace DashPi
       void drawElements(PlaybackState current_state);
 
     private:
+      std::shared_ptr<PlaybackController> _pc;
       std::unique_ptr<VolumeController> _vc;
       sf::RenderTexture controls,
                         play_pause,
