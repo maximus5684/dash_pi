@@ -16,6 +16,7 @@ Requirements
 * Audio Amplifier with RCA Input - recommend [Lanzar Mini MAX 1600W Amplifier](https://www.amazon.com/LANZAR-MNX460-Mini-Max-MOSFET-Channel/dp/B00NYCMCES) [~$200]
 * Amplifier cable kit - recommend [BOSS Audio KIT10](https://www.amazon.com/Audio-Amplifier-Installation-Performance-Interconnect/dp/B0002VM8RU/) [$18]
 * [RCA Ground-loop Isolator](https://www.amazon.com/BOSS-Audio-B25N-Ground-Isolator/dp/B000LP4RMG/) [$5 - $7]
+* At least 2x 0.1mm pitch header pins
 
 ### Software ###
 
@@ -56,6 +57,8 @@ in position 5. This will set the power supply for 12V output.
   * Connect constant power input to battery
   * Connect ground to nearby metal chassis mounting point
   * Connect turn-on wire to ignition signal from old head unit
+* Solder header pins onto, at least, pins 13 and 14 of the HifiBerry DAC+
+  * Warning: According to HifiBerry, this will void your warranty
 * Put together Raspberry Pi, Raspberry Pi Touch Monitor, and HifiBerry DAC+
 * Install DCDC-USB power supply
   * Connect constant power input to red input wire
