@@ -45,14 +45,26 @@ This will configure the power supply for Automotive mode, 5V output, and a 5 sec
 shutdown signal delay with a 60 second shutdown wait time. For more information on
 jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-DCDC-USB/PWR-DCDC-USB-manual.pdf).
 
+If, instead, you want to use a 12V-to-5V micro USB adapter, like I did, omit the jumper
+in position 5. This will set the power supply for 12V output.
+
 ### Basic Steps (OS-independent) ###
 
 * Remove factory stereo head unit
 * Install amplifier within cable-reach of Raspberry Pi
   * Connect wiring harness to factory speaker outputs
   * Connect constant power input to battery
+  * Connect ground to nearby metal chassis mounting point
   * Connect turn-on wire to ignition signal from old head unit
 * Put together Raspberry Pi, Raspberry Pi Touch Monitor, and HifiBerry DAC+
+* Install DCDC-USB power supply
+  * Connect constant power input to red input wire
+  * Connect ground to black input wire
+  * Connect ignition signal to white input wire
+  * Connect black output wire to micro-USB cable negative
+  * Connect yellow output wire to micro-USB cable positive
+  * Connect two-pin remote power switch connector to pins 13 and 14 (BCM 27 and GND)
+    * Most shutdown scripts use pins 5 and 6 (BCM 3 and GND) but these are used for configuration of the Hi-Fi Berry DAC+
 
 ### Basic Steps - Raspbian Jessie ###
 
@@ -60,6 +72,7 @@ jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-
 * Update everything (apt-get, rpi-update)
 * Install newer version of PulseAudio to fix drop-out bug (at least v6.0)
 * Configure for use as Bluetooth A2DP sink with [Super-Simple-Raspberry-Pi-Audio-Receiver-Install](https://github.com/BaReinhard/Super-Simple-Raspberry-Pi-Audio-Receiver-Install)
+* To install the shutdown script, run install_scripts/install_shutdown_listener.sh
 * Install [sfml-pi](https://github.com/maximus5684/sfml-pi)
 * Build and install Dash Pi
   * cd dash_pi
@@ -73,7 +86,8 @@ jumper configuration, see [the manual](http://resources.mini-box.com/online/PWR-
 * Install stock Raspbian Stretch on RPi
 * Update everything (apt-get, rpi-update)
 * Install prereqs with install_scripts/install_prereqs.sh
-* Run install_scripts/install_bluetooth_raspbian_stretch.sh
+* To install the shutdown script, run install_scripts/install_shutdown_listener.sh
+* To set up bluetooth streaming, run install_scripts/install_bluetooth_raspbian_stretch.sh
 * Reboot
 * Build and install Dash Pi
   * cd dash_pi
