@@ -69,10 +69,14 @@ void DashPiMain::run()
 
       if (event.type == Event::TouchBegan)
       {
-        //Change to control_bar-local coordinates.
         sf::Event::TouchEvent te = event.touch;
-        te.y -= control_bar_sprite.getGlobalBounds().top;
-        control_bar.handleEvent(te);
+
+        if (te.y > control_bar_sprite.getGlobalBounds().top)
+        {
+          //Change to control_bar-local coordinates.
+          te.y -= control_bar_sprite.getGlobalBounds().top;
+          control_bar.handleEvent(te);
+        }
       }
     }
   }

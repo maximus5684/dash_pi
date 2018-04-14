@@ -50,6 +50,16 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   play_pause_icon_sprite.setOrigin((float)play_pause_icon_sprite.getLocalBounds().width * 0.5, (float)play_pause_icon_sprite.getLocalBounds().height * 0.5);
   play_pause_icon_sprite.setPosition((float)width * 0.5, (float)height * 0.5);
 
+  //Create the volume up/down buttons texture.
+  vol_up_down_icon.loadFromFile("../icons/arrow_128.png");
+  Vector2u vol_up_down_size = vol_up_down_icon.getSize();
+
+  //Create sprite to hold the volume up button.
+  vol_up_sprite.setTexture(vol_up_down_icon);
+  vol_up_sprite.setScale(((float)controls_size.y / (float)vol_up_down_size.x), ((float)controls_size.y / (float)vol_up_down_size.y));
+  vol_up_sprite.setOrigin(vol_up_sprite.getLocalBounds().width, vol_up_sprite.getLocalBounds().height); //Bottom right
+  vol_up_sprite.setPosition((float)width, (float)height);
+
   //Create the mute/unmute button texture.
   muted_icon.loadFromFile("../icons/muted_128.png");
   unmuted_icon.loadFromFile("../icons/unmuted_128.png");
@@ -60,7 +70,15 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   mute_sprite.setTexture(muted_icon);
   mute_sprite.setScale(((float)controls_size.y / (float)mute_size.x), ((float)controls_size.y / (float)mute_size.y));
   mute_sprite.setOrigin(mute_sprite.getLocalBounds().width, mute_sprite.getLocalBounds().height); //Bottom right
-  mute_sprite.setPosition((float)width, (float)height);
+  mute_sprite.setPosition((float)width - vol_up_sprite.getLocalBounds().width - 2, (float)height);
+
+  //Create sprite to hold the volume down button.
+  vol_down_sprite.setTexture(vol_up_down_icon);
+  vol_down_sprite.setScale(((float)controls_size.y / (float)vol_up_down_size.x), ((float)controls_size.y / (float)vol_up_down_size.y));
+  vol_down_sprite.setOrigin(vol_down_sprite.getLocalBounds().width * 0.5, vol_down_sprite.getLocalBounds().height * 0.5); //Bottom right
+  vol_down_sprite.setPosition((float)width - vol_down_sprite.getLocalBounds().width * 0.5 - vol_up_sprite.getLocalBounds().width - mute_sprite.getLocalBounds().width - 4,
+                              (float)height - vol_down_sprite.getLocalBounds().height * 0.5);
+  vol_down_sprite.setRotation(180.0);
 
   return RenderTexture::create(width, height, depthBuffer);
 }
@@ -69,7 +87,9 @@ void ControlBar::handleEvent(sf::Event::TouchEvent touch)
 {
   Vector2u bar_size = getSize();
   FloatRect pp_bounds = play_pause_btn.getGlobalBounds();
+  FloatRect vol_up_bounds = vol_up_sprite.getGlobalBounds();
   FloatRect mute_bounds = mute_sprite.getGlobalBounds();
+  FloatRect vol_down_bounds = vol_down_sprite.getGlobalBounds();
 
   // Play/Pause Button
   if (touch.x > pp_bounds.left &&
@@ -77,13 +97,17 @@ void ControlBar::handleEvent(sf::Event::TouchEvent touch)
       touch.y > pp_bounds.top)
   {
     if (_pc->getPlaybackState() == PlaybackState::PAUSED)
-    {
       _pc->resumePlayback();
-    }
     else if (_pc->getPlaybackState() == PlaybackState::PLAYING)
-    {
       _pc->pausePlayback();
-    }
+  }
+
+  // Volume Up Button
+  if (touch.x > vol_up_bounds.left &&
+      touch.x < (vol_up_bounds.left + vol_up_bounds.width) &&
+      touch.y > vol_up_bounds.top)
+  {
+    _vc->up();
   }
 
   // Mute Button
@@ -92,13 +116,17 @@ void ControlBar::handleEvent(sf::Event::TouchEvent touch)
       touch.y > mute_bounds.top)
   {
     if (_vc->getCurrentVolume() == 0)
-    {
       _vc->unmute();
-    }
     else
-    {
       _vc->mute();
-    }
+  }
+
+  // Volume Down Button
+  if (touch.x > vol_down_bounds.left &&
+      touch.x < (vol_down_bounds.left + vol_down_bounds.width) &&
+      touch.y > vol_down_bounds.top)
+  {
+    _vc->down();
   }
 }
 
@@ -126,6 +154,8 @@ void ControlBar::drawElements(PlaybackState current_state)
 
   draw(play_pause_icon_sprite);
 
+  draw(vol_up_sprite);
+
   if (_vc->getCurrentVolume() == 0)
   {
     mute_sprite.setTexture(muted_icon);
@@ -136,6 +166,8 @@ void ControlBar::drawElements(PlaybackState current_state)
   }
 
   draw(mute_sprite);
+
+  draw(vol_down_sprite);
 
   display();
 }

@@ -26,11 +26,14 @@ namespace DashPi
       sf::Texture muted_icon,
                   unmuted_icon,
                   playing_icon,
-                  paused_icon;
+                  paused_icon,
+                  vol_up_down_icon;
       sf::Sprite controls_sprite,
                  mute_sprite,
                  play_pause_sprite,
-                 play_pause_icon_sprite;
+                 play_pause_icon_sprite,
+                 vol_up_sprite,
+                 vol_down_sprite;
   };
 }
 
