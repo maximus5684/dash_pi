@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <chrono>
 
 namespace DashPi
 {
@@ -12,7 +13,7 @@ namespace DashPi
     PAUSED
   };
 
-  const std::vector<std::string> TABS = {"AUDIO", "VIDEO", "NAV", "PHONE"};
+  const std::vector<std::string> TABS = {"AUDIO", "NAV", "PHONE", ""};
 }
 
 #endif

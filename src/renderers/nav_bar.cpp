@@ -1,6 +1,7 @@
 #include <renderers/nav_bar.hpp>
 
 using namespace sf;
+using namespace std::chrono;
 using namespace DashPi;
 
 NavBar::NavBar() :
@@ -16,7 +17,7 @@ void NavBar::drawElements()
 {
   Vector2u size = getSize();
   float tab_width = size.x / (float)TABS.size();
-  float text_vert_offset = size.y * 0.1;
+  float text_vert_offset = size.y * 0.2;
 
   Font label_font;
   label_font.loadFromFile("/usr/share/fonts/truetype/freefont/FreeSans.ttf");
@@ -52,4 +53,7 @@ void NavBar::drawElements()
     nav_label.setPosition(nav_label_x, nav_label_y);
     draw(nav_label);
   }
+
+  auto now = system_clock::now();
+  ostringstream time_oss;
 }
