@@ -1,9 +1,12 @@
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include <chrono>
+#include <ctime>
+#include <iomanip>
 
 namespace DashPi
 {

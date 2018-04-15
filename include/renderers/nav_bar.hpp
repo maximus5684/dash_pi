@@ -15,6 +15,17 @@ namespace DashPi
       void drawElements();
 
     private:
+      sf::Vector2u size;
+      float tab_width;
+      sf::Font label_font;
+      sf::RectangleShape divider;
+      std::vector<sf::Text> nav_labels;
+      sf::Text colon_label,
+               hour_label,
+               minute_label,
+               second_label;
+      bool time_initialized;
+      int last_hour, last_min, last_sec;
   };
 }
 
