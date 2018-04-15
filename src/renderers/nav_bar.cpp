@@ -15,7 +15,7 @@ NavBar::NavBar() :
     nav_label.setFont(label_font);
     nav_label.setStyle(Text::Bold);
     nav_label.setString(TABS[i]);
-    nav_label.setOrigin(nav_label.getLocalBounds().width * 0.5, nav_label.getLocalBounds().height);
+    nav_label.setOrigin(nav_label.getLocalBounds().width * 0.5, nav_label.getLocalBounds().height * 0.85);
     nav_labels.push_back(nav_label);
   }
 
@@ -70,10 +70,10 @@ void NavBar::drawElements()
     draw(nav_labels[i]);
   }
 
-  colon_label.setPosition(size.x - tab_width * 0.333, size.y * 0.375);
+  colon_label.setPosition(size.x - tab_width * 0.333, size.y * 0.3);
   draw(colon_label);
 
-  colon_label.setPosition(size.x - tab_width * 0.666, size.y * 0.375);
+  colon_label.setPosition(size.x - tab_width * 0.666, size.y * 0.3);
   draw(colon_label);
 
   auto now = std::chrono::system_clock::now();
@@ -84,24 +84,24 @@ void NavBar::drawElements()
       now_tm->tm_hour != last_hour)
   {
     hour_label.setString(std::to_string(now_tm->tm_hour));
-    hour_label.setOrigin(hour_label.getLocalBounds().width * 0.5, 0);
-    hour_label.setPosition(size.x - tab_width * 0.8333, size.y * 0.21);
+    hour_label.setOrigin(hour_label.getLocalBounds().width * 0.5, hour_label.getLocalBounds().height * 0.5);
+    hour_label.setPosition(size.x - tab_width * 0.8333, size.y * 0.2);
   }
 
   if (!time_initialized ||
       now_tm->tm_min != last_min)
   {
     minute_label.setString(std::to_string(now_tm->tm_min));
-    minute_label.setOrigin(minute_label.getLocalBounds().width * 0.5, 0);
-    minute_label.setPosition(size.x - tab_width * 0.5, size.y * 0.21);
+    minute_label.setOrigin(minute_label.getLocalBounds().width * 0.5, minute_label.getLocalBounds().height * 0.5);
+    minute_label.setPosition(size.x - tab_width * 0.5, size.y * 0.2);
   }
 
   if (!time_initialized ||
       now_tm->tm_sec != last_sec)
   {
     second_label.setString(std::to_string(now_tm->tm_sec));
-    second_label.setOrigin(second_label.getLocalBounds().width * 0.5, 0);
-    second_label.setPosition(size.x - tab_width * 0.1666, size.y * 0.21);
+    second_label.setOrigin(second_label.getLocalBounds().width * 0.5, second_label.getLocalBounds().height * 0.5);
+    second_label.setPosition(size.x - tab_width * 0.1666, size.y * 0.2);
   }
 
   draw(hour_label);
