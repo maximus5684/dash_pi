@@ -57,8 +57,8 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   //Create sprite to hold the volume up button.
   vol_up_sprite.setTexture(vol_up_down_icon);
   vol_up_sprite.setScale(((float)controls_size.y / (float)vol_up_down_size.x), ((float)controls_size.y / (float)vol_up_down_size.y));
-  vol_up_sprite.setOrigin(vol_up_sprite.getLocalBounds().width, vol_up_sprite.getLocalBounds().height); //Bottom right
-  vol_up_sprite.setPosition((float)width, (float)height);
+  vol_up_sprite.setOrigin(0, vol_up_sprite.getGlobalBounds().height * 0.5);
+  vol_up_sprite.setPosition(width - (float)vol_up_sprite.getGlobalBounds().width, (float)controls_size.y * 0.5);
 
   //Create the mute/unmute button texture.
   muted_icon.loadFromFile("../icons/muted_128.png");
@@ -69,16 +69,15 @@ bool ControlBar::create(unsigned int width, unsigned int height, bool depthBuffe
   //Create the sprite to hold the mute button texture.
   mute_sprite.setTexture(muted_icon);
   mute_sprite.setScale(((float)controls_size.y / (float)mute_size.x), ((float)controls_size.y / (float)mute_size.y));
-  mute_sprite.setOrigin(mute_sprite.getLocalBounds().width, mute_sprite.getLocalBounds().height); //Bottom right
-  mute_sprite.setPosition((float)width - vol_up_sprite.getLocalBounds().width - 2, (float)height);
+  mute_sprite.setOrigin(0, mute_sprite.getGlobalBounds().height * 0.5);
+  mute_sprite.setPosition((float)width - vol_up_sprite.getGlobalBounds().width - mute_sprite.getGlobalBounds().width - 2, (float)controls_size.y * 0.5);
 
   //Create sprite to hold the volume down button.
   vol_down_sprite.setTexture(vol_up_down_icon);
   vol_down_sprite.setScale(((float)controls_size.y / (float)vol_up_down_size.x), ((float)controls_size.y / (float)vol_up_down_size.y));
-  vol_down_sprite.setOrigin(vol_down_sprite.getLocalBounds().width * 0.5, vol_down_sprite.getLocalBounds().height * 0.5); //Bottom right
-  vol_down_sprite.setPosition((float)width - vol_down_sprite.getLocalBounds().width * 0.5 - vol_up_sprite.getLocalBounds().width - mute_sprite.getLocalBounds().width - 4,
-                              (float)height - vol_down_sprite.getLocalBounds().height * 0.5);
+  vol_down_sprite.setOrigin(0, vol_down_sprite.getGlobalBounds().height * 0.5);
   vol_down_sprite.setRotation(180.0);
+  vol_down_sprite.setPosition((float)width - vol_up_sprite.getGlobalBounds().width - mute_sprite.getGlobalBounds().width - 6, (float)controls_size.y * 1.1);
 
   return RenderTexture::create(width, height, depthBuffer);
 }
