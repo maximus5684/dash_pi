@@ -1,7 +1,7 @@
 #ifndef NAV_BAR_HPP
 #define NAV_BAR_HPP
 
-#include <common.hpp>
+#include <utils.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace DashPi
@@ -15,6 +15,7 @@ namespace DashPi
       void drawElements();
 
     private:
+      static const unsigned int TEXT_CHAR_SIZE;
       sf::Vector2u size;
       float tab_width;
       sf::Font label_font;

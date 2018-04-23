@@ -6,7 +6,6 @@
 #include <string>
 #include <chrono>
 #include <ctime>
-#include <iomanip>
 
 #define ENABLE_SS 1
 
@@ -25,7 +24,7 @@ namespace DashPi
     ACTIVE
   };
 
-  const std::vector<std::string> TABS = {"AUDIO", "NAV", "PHONE", ""};
+  const std::vector<std::string> TABS = {"AUDIO", "NAV", "PHONE"};
 }
 
 #endif
